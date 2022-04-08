@@ -1,5 +1,7 @@
 # async VS defer 스크립트 로딩
 
+<br>
+
 ## 우선 브라우저의 동작 원리를 가볍게 생각해봅시다.
 
 브라우저는 HTML을 읽다가 `<script></script>` 태그를 만나면 스크립트를 실행하기 위해 DOM 생성을 멈춘 뒤 자바스크립트 엔진에게 제어권을 주게 되고 파싱이 끝나면 다시 렌더링 엔진에게 제어권을 넘겨 중단된 부분부터 재개합니다.
@@ -67,3 +69,8 @@ defer는 스크립트가 실행되기 전에 페이지가 화면에 그려집니
 그러면 사용자는 JS 관련 컴포넌트들이 준비되지 않은 상태의 정적인 화면을 마주하게 됩니다. 그래서 지연 스크립트에 영향을 받는 부분이 있다면 로딩 인디케이터가 존재해야 합니다.
 
 <br>
+
+### 참고
+
+- [<script>로 HTML 문서에 자바스크립트 넣기 (feat. defer & async)](https://www.daleseo.com/js-script-defer-async/)
+- [defer, async 스크립트](https://ko.javascript.info/script-async-defer)
