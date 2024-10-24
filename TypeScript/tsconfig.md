@@ -165,3 +165,6 @@ ts-node는 기본적으로 CommonJS를 사용하기에 ES module 시스템을 �
 
 true로 설정해주면 ts-node가 ES module 시스템으로 동작하게 된다.
 
+## 참고 및 출처
+
+- [한 입 크기로 잘라먹는 타입스크립트(TypeScript)](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8?srsltid=AfmBOoqKyeukk5UXUwfKCAc4kjJVMZ6l_1muf8wV2_i14aiBihNU4Kbs)
