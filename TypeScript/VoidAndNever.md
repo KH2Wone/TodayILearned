@@ -24,19 +24,19 @@ tsconfig.json에 `compilerOptions > strictNullChecks`를 false로 하면 `null`�
 
 ```typescript
 // undefined (1)
-function func2: undefined {
+function func2(): undefined {
     console.log("Hello");
     return; // undefined를 반환하는 것과 동일함
 }
 
 // undefined (2)
-function func3: undefined {
+function func3(): undefined {
     console.log("Hello");
     return undefined;
 }
 
 // null
-function func4: null {
+function func4(): null {
     console.log("Hello");
     return null; // undefined (1) 처럼 return만 하는건 안됨
 }
@@ -51,7 +51,7 @@ function func4: null {
 > 불가능(모순)을 의미하는 타입
 
 ```typescript
-function func5: never {
+function func5(): never {
     while(true) {}
 }
 ```
@@ -59,7 +59,7 @@ function func5: never {
 이처럼 정상적으로 종료될 수 없어서 해당 함수에 반환값이 있는게 모순이라는 의미일 때 `never` 타입을 사용한다.
 
 ```typescript
-function func6: never {
+function func6(): never {
     throw new Error();
 }
 ```
