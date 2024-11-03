@@ -55,6 +55,17 @@ function collectOddValues(arr) {
 
 문자열은 변경할 수 없기 때문에 slice 혹은 substring을 사용해서 복사본을 만들어야 한다.
 
+## Math.pow 구현해보기
+
+```javascript
+function power(x, y){
+    if(y === 0) return 1;
+    return x * power(x, y-1);
+}
+```
+
+종료조건 넣어주는 것까지는 수월하게 되었는데 x * 재귀 해주는걸 이해하는데 시간이 오래걸렸다...
+
 ## 참고 및 출처
 
 - [【한글자막】 JavaScript 알고리즘 & 자료구조 마스터클래스](https://www.udemy.com/course/best-javascript-data-structures/?couponCode=ACCAGE0923)
