@@ -115,6 +115,99 @@ forEach(arr2, (it) => {
 
 다음과 같이 타입을 유연하게 적용하여 forEach를 만들 수 있다.
 
+## 제네릭 인터페이스
+
+```typescript
+interface KeyPair<K, V> {
+    key: K;
+    value: V;
+}
+
+let keyPair: KeyPair<string, number> = {
+    key: "key",
+    value: 0,
+}
+
+let keyPair2: KeyPair<boolean, string[]> = {
+    key: true,
+    value: ["1"],
+}
+```
+
+이처럼 인터페이스를 제네릭으로 만들어줄 수 있다.
+
+## 인덱스 시그니처
+
+```typescript
+interface Map<V> {
+    [key: string]: V;
+}
+
+let stringMap: Map<string> = {
+    key: "value"
+}
+```
+
+## 타입 별칭
+
+```typescript
+type Map2<V> = {
+    [key: string]: V;
+}
+```
+
+## Promise
+
+```typescript
+const promise = new Promise<number>((resolve, reject) => {
+    setTimeout(() => {
+        resolve(20);
+        reject("~때문에 실패")
+    }, 3000);
+})
+
+promise.then(response => {
+    // response: unknown
+    console.log(response * 10);
+})
+
+promise.catch(err => {
+    // err: any
+    if (typeof err === "string") {
+        console.log(err);
+    }
+})
+```
+
+promise는 제네릭 클래스를 기반으로 선언되어 있기 때문에
+타입 변수로 결과값의 타입을 정의해줄 수 있지만 실패했을 때의 타입은 지정할 수 없다.
+
+### 반환값
+
+```typescript
+interface Post {
+    id: number;
+    title: string;
+    content: string;
+}
+
+function fetchPost(): Promise<Post> {
+    return new Promise((resolve, reject) => {
+        // new Promise<Post>도 가능
+        setTimeout(() => {
+            resolve({
+                id: 1,
+                title: "게시글 제목",
+                content: "게시물 컨텐츠"
+            })
+        }, 3000);
+    })
+}
+```
+
+주석 내용처럼 new Promise<Post>로 타입을 정해줘도 좋지만, 협업 할 때에
+fetchPost 함수 앞에 Promise<Post>라고 명시해주면 복잡한 코드 일수록 알아보기 쉽다.
+
 ## 참고 및 출처
 
 - [한 입 크기로 잘라먹는 타입스크립트(TypeScript)](https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8?srsltid=AfmBOoqKyeukk5UXUwfKCAc4kjJVMZ6l_1muf8wV2_i14aiBihNU4Kbs)
