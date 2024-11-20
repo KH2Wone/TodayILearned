@@ -1,6 +1,6 @@
 # 유틸리티 타입
 
-## Partial<T>
+## Partial\<T>
 
 > 특정 객체 타입의 모든 프로퍼티를 선택적 프로퍼티로 바꿔주는 타입
 
@@ -30,7 +30,7 @@ type Partial<T> = {
 }
 ```
 
-## Required<T>
+## Required\<T>
 
 > 특정 객체 타입의 모든 프로퍼티를 필수 프로퍼티로 바꿔주는 타입
 
@@ -56,7 +56,7 @@ type Required<T> = {
 
 `-?` 이 코드를 넣어주면 모든 프로퍼티가 필수 프로퍼티가 된다.
 
-## Readonly<T>
+## Readonly\<T>
 
 > 특정 객체 타입에서 모든 프로퍼티를 읽기 전용 프로퍼티로 만들어주는 타입
 
@@ -139,9 +139,11 @@ Pick 유틸리티 타입을 사용하였는데,
 
 이것은 즉
 
+```typescript
 Pick<Post, Exclude<keyof Post, 'title'>>
-Pick<Post Exclude<'title' | 'content' | 'tags' | 'thumbnailURL', 'title'>>
+Pick<Post, Exclude<'title' | 'content' | 'tags' | 'thumbnailURL', 'title'>>
 Pick<Post, 'content' | 'tags' | 'thumbnailURL'>
+```
 
 이렇게 해석할 수 있다.
 
@@ -187,6 +189,57 @@ type Record<K extends keyof any, V> = {
 
 무슨 타입인지는 모르지만, 어떤 객체의 key를 추출해둔 유니온 타입이다
 라는 의미로 K 뒤에 extends keyof any를 넣어준다.
+
+## Exclude<T, U>
+
+> T에서 U를 제거하는 타입
+
+Omit 에서 언급한 적 있으므로 직접 구현만 해보려고 한다.
+
+### 직접 구현해보기
+
+```typescript
+type Exclude<T, U> = T extends U ? never : T;
+
+type A = Exclude<string | boolean, boolean>;
+// Exclude<string, boolean> | Exclude<boolean, boolean>
+// string | never
+
+// never는 공집합이므로 결과는 string
+```
+
+## Extract<T, U>
+
+> T에서 U를 추출하는 타입
+
+### 직접 구현해보기
+
+```typescript
+type Extract<T, U> = T extends U ? T : never;
+
+type B = Extract<string | boolean, boolean>; // string
+```
+
+## ReturnType\<T>
+
+> 함수의 반환값 타입을 추출하는 타입
+
+### 직접 구현해보기
+
+```typescript
+type ReturnType<T extends (...arg: any) => any> =
+    T extends (...args: any) => infer R ? R : never;
+
+function funcA() {
+    return "hello";
+}
+
+function funcB() {
+    return 10;
+}
+
+type ReturnA = ReturnType<typeof funcA>;
+```
 
 ## 참고 및 출처
 
